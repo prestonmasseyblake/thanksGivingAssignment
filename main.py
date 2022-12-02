@@ -5,11 +5,18 @@ import matplotlib.pyplot as plt
 import networkx.algorithms.community as nx_comm
 import itertools
 from networkx.algorithms.community import greedy_modularity_communities
+from itertools import combinations
 # import sys
+
 #1 
+
+
+
+
+
+
+
 minimum_int = -2400000
-
-
 # 2 Determine the modularity of the network below. Show your work.
 
 G = nx.Graph()
@@ -117,11 +124,35 @@ def greedy_modularity(G,C,  weight="weight", resolution=1):
         M = my_modularity(G,[pair_temp, right_arr ]) 
         print(M)
 
+result = greedy_modularity_communities(G)
+# print(result)
+def greedy_modularity(G,C,weight="weight",resolution=1):
+    # loop until 1 comm 
+    while C != len(C):
+    # max_m = - infiniti
+        max_val = float('-inf')
+    # for all pa\irs of coms C1 & C2 
+    for (c1,c2) in combinations(C,2):
+        C1 = [c1,c2]
+    # combine C1, & C2 
+        M = my_modularity(G,C1)  
+        if M > max_val:
+            M = max_val
+    # update max M 
+    return max_val
+
+karate_graph = nx.karate_club_graph()
+result = greedy_modularity_communities(G)
+print(result)
+print(karate_graph)
+
+
+
 
 # print(nx.greedy_modularity_communities(G) )
-GGG = nx.karate_club_graph()
-c = greedy_modularity_communities(GGG)
-print(c)
+# GGG = nx.karate_club_graph()
+# c = greedy_modularity_communities(GGG)
+# print(c)
     # max m = -infiniti 
     # for all pairs of coms c1 of c2 
 
@@ -139,7 +170,7 @@ print(c)
 #     1: "1",
 # }
 # cc =[{0, 1, 2, 3, 4}, {5, 6, 7, 8, 9}]
-result = my_modularity(G, c_example)
+# result = my_modularity(G, c_example)
 # greedy_modularity(G,cc)
 # example_dict = {
 #     0: 1,
